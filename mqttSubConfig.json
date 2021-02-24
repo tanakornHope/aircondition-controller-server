@@ -1,0 +1,23 @@
+{
+    "myFinalProject/rpi1/objDetector": {
+        "qos": 0
+    },
+    "myFinalProject/rpi1/onlineStatus/online": {
+        "qos": 2
+    },
+    "myFinalProject/rpi2/objDetector": {
+        "qos": 0
+    },
+    "myFinalProject/rpi2/onlineStatus/online": {
+        "qos": 2
+    },
+    "myFinalProject/airconController1/#": {
+        "qos": 2
+    },
+    "myFinalProject/airconController2/#": {
+        "qos": 2
+    },
+    "myFinalProject/airconController3/#": {
+        "qos": 2
+    }
+}

@@ -1,0 +1,82 @@
+{
+  "timeStamp": "",
+  "MQTTbroker": {
+    "online": false
+  },
+  "rpi": [
+    {
+      "online": false,
+      "isperson": false,
+      "prob": "0.0"
+    },
+    {
+      "online": false,
+      "isperson": false,
+      "prob": "0.0"
+    }
+  ],
+  "airconController": [
+    {
+      "controllercmd": false,
+      "properties": {
+        "wifiLocalIP": "xxx.xxx.xxx.xxx",
+        "online": false,
+        "bootcount": 0
+      },
+      "measure": {
+        "voltage": null,
+        "current": null,
+        "power": null,
+        "energy": null,
+        "frequency": null
+      }
+    },
+    {
+      "controllercmd": false,
+      "properties": {
+        "wifiLocalIP": "xxx.xxx.xxx.xxx",
+        "online": false,
+        "bootcount": 0
+      },
+      "measure": {
+        "voltage": null,
+        "current": null,
+        "power": null,
+        "energy": null,
+        "frequency": null
+      }
+    },
+    {
+      "controllercmd": false,
+      "properties": {
+        "wifiLocalIP": "xxx.xxx.xxx.xxx",
+        "online": false,
+        "bootcount": 0
+      },
+      "measure": {
+        "voltage": null,
+        "current": null,
+        "power": null,
+        "energy": null,
+        "frequency": null
+      }
+    }
+  ],
+  "lightingController": [
+    {
+      "controllercmd": false,
+      "properties": {
+        "wifiLocalIP": "xxx.xxx.xxx.xxx",
+        "online": false,
+        "bootcount": 0
+      },
+      "measure": {
+        "voltage": null,
+        "current": null,
+        "power": null,
+        "energy": null,
+        "frequency": null
+      }
+    }
+  ]
+}

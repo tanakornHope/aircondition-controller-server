@@ -1,0 +1,29 @@
+{
+  "name": "nodejstest",
+  "version": "1.0.0",
+  "description": "fortest",
+  "main": "index.js",
+  "scripts": {
+    "start": "node devicesServer.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "thanakorn khunkhao",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^3.3.6",
+    "cookie-parser": "^1.4.5",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "morgan": "^1.6.1",
+    "multer": "^1.4.2",
+    "vue": "^1.0.10",
+    "vue-resource": "^0.1.17",
+    "mongoose": "",
+    "mqtt": "",
+    "edit-json-file": "",
+    "concurrently": "",
+    "moment-timezone": "",
+    "dayjs": ""
+  }
+}
