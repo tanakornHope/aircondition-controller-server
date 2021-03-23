@@ -108,82 +108,86 @@ function mongodb_connect() {
 function putDataToMongoDB() {
     return new Promise(function (resolve, reject) {
         setInterval(() => {
-            console.log(deviceDataModel.timeStamp);
-            //resolve(console.log(mongoDBconnection.readyState));
-            var mongooseDocument = new MongooseModel({
-                timeStamp: deviceDataModel.timeStamp,
-                MQTTbroker: { online: deviceDataModel.MQTTbroker.online },
-                server: { online: true },
-                rpi: [
-                    {
-                        online: deviceDataModel.rpi[0].online,
-                        isperson: deviceDataModel.rpi[0].isperson,
-                        prob: deviceDataModel.rpi[0].prob
-                    },
-                    {
-                        online: deviceDataModel.rpi[1].online,
-                        isperson: deviceDataModel.rpi[1].isperson,
-                        prob: deviceDataModel.rpi[1].prob
-                    }
-                ],
-                airconController: [
-                    {
-                        controllercmd: deviceDataModel.airconController[0].controllercmd,
-                        properties: {
-                            wifiLocalIP: deviceDataModel.airconController[0].properties.wifiLocalIP,
-                            online: deviceDataModel.airconController[0].properties.online,
-                            bootcount: deviceDataModel.airconController[0].properties.bootcount
+            try {
+                console.log("Document Inserted at: "+deviceDataModel.timeStamp);
+                var mongooseDocument = new MongooseModel({
+                    timeStamp: deviceDataModel.timeStamp,
+                    MQTTbroker: { online: deviceDataModel.MQTTbroker.online },
+                    server: { online: true },
+                    rpi: [
+                        {
+                            online: deviceDataModel.rpi[0].online,
+                            isperson: deviceDataModel.rpi[0].isperson,
+                            prob: deviceDataModel.rpi[0].prob
                         },
-                        voltage: deviceDataModel.airconController[0].measure.voltage,
-                        current: deviceDataModel.airconController[0].measure.current,
-                        power: deviceDataModel.airconController[0].measure.power,
-                        energy: deviceDataModel.airconController[0].measure.energy,
-                        frequency: deviceDataModel.airconController[0].measure.frequency
-                    },
-                    {
-                        controllercmd: deviceDataModel.airconController[1].controllercmd,
-                        properties: {
-                            wifiLocalIP: deviceDataModel.airconController[1].properties.wifiLocalIP,
-                            online: deviceDataModel.airconController[1].properties.online,
-                            bootcount: deviceDataModel.airconController[1].properties.bootcount
+                        {
+                            online: deviceDataModel.rpi[1].online,
+                            isperson: deviceDataModel.rpi[1].isperson,
+                            prob: deviceDataModel.rpi[1].prob
+                        }
+                    ],
+                    airconController: [
+                        {
+                            controllercmd: deviceDataModel.airconController[0].controllercmd,
+                            properties: {
+                                wifiLocalIP: deviceDataModel.airconController[0].properties.wifiLocalIP,
+                                online: deviceDataModel.airconController[0].properties.online,
+                                bootcount: deviceDataModel.airconController[0].properties.bootcount
+                            },
+                            voltage: deviceDataModel.airconController[0].measure.voltage,
+                            current: deviceDataModel.airconController[0].measure.current,
+                            power: deviceDataModel.airconController[0].measure.power,
+                            energy: deviceDataModel.airconController[0].measure.energy,
+                            frequency: deviceDataModel.airconController[0].measure.frequency
                         },
-                        voltage: deviceDataModel.airconController[1].measure.voltage,
-                        current: deviceDataModel.airconController[1].measure.current,
-                        power: deviceDataModel.airconController[1].measure.power,
-                        energy: deviceDataModel.airconController[1].measure.energy,
-                        frequency: deviceDataModel.airconController[1].measure.frequency
-                    },
-                    {
-                        controllercmd: deviceDataModel.airconController[2].controllercmd,
-                        properties: {
-                            wifiLocalIP: deviceDataModel.airconController[2].properties.wifiLocalIP,
-                            online: deviceDataModel.airconController[2].properties.online,
-                            bootcount: deviceDataModel.airconController[2].properties.bootcount
+                        {
+                            controllercmd: deviceDataModel.airconController[1].controllercmd,
+                            properties: {
+                                wifiLocalIP: deviceDataModel.airconController[1].properties.wifiLocalIP,
+                                online: deviceDataModel.airconController[1].properties.online,
+                                bootcount: deviceDataModel.airconController[1].properties.bootcount
+                            },
+                            voltage: deviceDataModel.airconController[1].measure.voltage,
+                            current: deviceDataModel.airconController[1].measure.current,
+                            power: deviceDataModel.airconController[1].measure.power,
+                            energy: deviceDataModel.airconController[1].measure.energy,
+                            frequency: deviceDataModel.airconController[1].measure.frequency
                         },
-                        voltage: deviceDataModel.airconController[2].measure.voltage,
-                        current: deviceDataModel.airconController[2].measure.current,
-                        power: deviceDataModel.airconController[2].measure.power,
-                        energy: deviceDataModel.airconController[2].measure.energy,
-                        frequency: deviceDataModel.airconController[2].measure.frequency
-                    }
-                ],
-                lightingController: [
-                    {
-                        controllercmd: deviceDataModel.lightingController[0].controllercmd,
-                        properties: {
-                            wifiLocalIP: deviceDataModel.lightingController[0].properties.wifiLocalIP,
-                            online: deviceDataModel.lightingController[0].properties.online,
-                            bootcount: deviceDataModel.lightingController[0].properties.bootcount
-                        },
-                        voltage: deviceDataModel.lightingController[0].measure.voltage,
-                        current: deviceDataModel.lightingController[0].measure.current,
-                        power: deviceDataModel.lightingController[0].measure.power,
-                        energy: deviceDataModel.lightingController[0].measure.energy,
-                        frequency: deviceDataModel.lightingController[0].measure.frequency
-                    }
-                ]
-            });
-            mongooseDocument.save();
+                        {
+                            controllercmd: deviceDataModel.airconController[2].controllercmd,
+                            properties: {
+                                wifiLocalIP: deviceDataModel.airconController[2].properties.wifiLocalIP,
+                                online: deviceDataModel.airconController[2].properties.online,
+                                bootcount: deviceDataModel.airconController[2].properties.bootcount
+                            },
+                            voltage: deviceDataModel.airconController[2].measure.voltage,
+                            current: deviceDataModel.airconController[2].measure.current,
+                            power: deviceDataModel.airconController[2].measure.power,
+                            energy: deviceDataModel.airconController[2].measure.energy,
+                            frequency: deviceDataModel.airconController[2].measure.frequency
+                        }
+                    ],
+                    lightingController: [
+                        {
+                            controllercmd: deviceDataModel.lightingController[0].controllercmd,
+                            properties: {
+                                wifiLocalIP: deviceDataModel.lightingController[0].properties.wifiLocalIP,
+                                online: deviceDataModel.lightingController[0].properties.online,
+                                bootcount: deviceDataModel.lightingController[0].properties.bootcount
+                            },
+                            voltage: deviceDataModel.lightingController[0].measure.voltage,
+                            current: deviceDataModel.lightingController[0].measure.current,
+                            power: deviceDataModel.lightingController[0].measure.power,
+                            energy: deviceDataModel.lightingController[0].measure.energy,
+                            frequency: deviceDataModel.lightingController[0].measure.frequency
+                        }
+                    ]
+                });
+                mongooseDocument.save();
+            }
+            catch(error) {
+                resolve(console.log("mongoDB data pushing error: ", error.toString()));
+            }
         }, 60000);
     });
 }

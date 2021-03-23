@@ -5,12 +5,6 @@ const editJsonFile = require("edit-json-file");
 const { Worker, isMainThread, parentPort, MessageChannel } = require('worker_threads');
 const { port1, port2 } = new MessageChannel();
 
-//const MQTT_SERVER = "203.158.131.196";
-const MQTT_SERVER = "127.0.0.1";
-const MQTT_PORT = "1883";
-const MQTT_USER = "admin";
-const MQTT_PASSWORD = "5617091";
-
 var deviceDataModel = JSON.parse(fs.readFileSync("deviceDataModel.json"));
 var mqttSubscribe = fs.readFileSync("mqttSubConfig.json");
 var airConditionPowerThreshold = 10;
@@ -26,7 +20,7 @@ var rpi2DetectedMsg = JSON.parse('{"isPerson":false,"prob":0.0}');
 
 async function main() {
     await initilizingMQTT();
-    //threadInit();
+    threadInit();
     doEventProcess();
     //console.log(deviceDataModel.get().airconController[0].controllercmd);
 }
@@ -37,13 +31,13 @@ function initilizingMQTT() {
     return new Promise(function (resolve, reject) {
         // Connect MQTT
         localMqttClient = mqtt.connect({
-            host: MQTT_SERVER,
-            port: MQTT_PORT,
-            username: MQTT_USER,
-            password: MQTT_PASSWORD,
-            clientId: "devicesServer",
+            host: '127.0.0.1',
+            port: '1883',
+            username: 'admin',
+            password: '5617091',
+            clientId: "devicesServer_local",
             will: { 
-                topic: 'myFinalProject/server/properties/online', payload: 'false', qos: 2, retain: true,
+                topic: 'myFinalProject/server/properties/online', payload: 'false', qos: 2, retain: true
             }
         });
 
@@ -65,13 +59,13 @@ function initilizingMQTT() {
 
         localMqttClient.on('connect', function () {
             resolve(console.log("local MQTT Connected = " + localMqttClient.connected));
+            localMqttClient.publish('myFinalProject/server/properties/online', 'true', { qos: 2, retain: true });
             deviceDataModel.MQTTbroker.online = true;
             // set both online flag.
-            localMqttClient.publish('myFinalProject/server/properties/online', 'true', { qos: 2, retain: false });
             // initilize command flag ''false for air condition controller
             for (let i = 0; i < deviceDataModel.airconController.length; i++) {
                 localMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "false", { qos: 2, retain: true });
-                cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "false", { qos: 2, retain: false });
+                cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "false", { qos: 2, retain: true });
             }
             localMqttClient.subscribe(JSON.parse(mqttSubscribe.toString()), function (err) {
                 if (err) {
@@ -103,7 +97,7 @@ function handleLocalMQTTMessage(topic, message){
     try {
         if (topic == "myFinalProject/rpi1/objDetector") {
             rpi1DetectedMsg = JSON.parse(message.toString());
-            cloudMqttClient.publish('myFinalProject/rpi1/objDetector', message.toString(), { qos: 0, retain: false });
+            cloudMqttClient.publish('myFinalProject/rpi1/objDetector', message.toString(), { qos: 0, retain: true });
         }
         if (topic == "myFinalProject/rpi1/onlineStatus/online") {
             cloudMqttClient.publish('myFinalProject/rpi1/onlineStatus/online', message.toString(), { qos: 2, retain: true });
@@ -119,7 +113,7 @@ function handleLocalMQTTMessage(topic, message){
 
         if (topic == "myFinalProject/rpi2/objDetector") {
             rpi2DetectedMsg = JSON.parse(message.toString());
-            cloudMqttClient.publish('myFinalProject/rpi2/objDetector', message.toString(), { qos: 0, retain: false });
+            cloudMqttClient.publish('myFinalProject/rpi2/objDetector', message.toString(), { qos: 0, retain: true });
         }
         if (topic == "myFinalProject/rpi2/onlineStatus/online") {
             cloudMqttClient.publish('myFinalProject/rpi2/onlineStatus/online', message.toString(), { qos: 2, retain: true });
@@ -134,7 +128,7 @@ function handleLocalMQTTMessage(topic, message){
         }
 
         if (topic == "myFinalProject/airconController1/measure") {
-            cloudMqttClient.publish('myFinalProject/airconController1/measure', message.toString(), { qos: 0, retain: false });
+            cloudMqttClient.publish('myFinalProject/airconController1/measure', message.toString(), { qos: 0, retain: true });
             deviceDataModel.airconController[0].measure = JSON.parse(message.toString());
         }
         if (topic == "myFinalProject/airconController1/properties") {
@@ -154,7 +148,7 @@ function handleLocalMQTTMessage(topic, message){
         }
 
         if (topic == "myFinalProject/airconController2/measure") {
-            cloudMqttClient.publish('myFinalProject/airconController2/measure', message.toString(), { qos: 0, retain: false });
+            cloudMqttClient.publish('myFinalProject/airconController2/measure', message.toString(), { qos: 0, retain: true });
             deviceDataModel.airconController[1].measure = JSON.parse(message.toString());
         }
         if (topic == "myFinalProject/airconController2/properties") {
@@ -174,7 +168,7 @@ function handleLocalMQTTMessage(topic, message){
         }
 
         if (topic == "myFinalProject/airconController3/measure") {
-            cloudMqttClient.publish('myFinalProject/airconController3/measure', message.toString(), { qos: 0, retain: false });
+            cloudMqttClient.publish('myFinalProject/airconController3/measure', message.toString(), { qos: 0, retain: true });
             deviceDataModel.airconController[2].measure = JSON.parse(message.toString());
         }
         if (topic == "myFinalProject/airconController3/properties") {
@@ -194,7 +188,7 @@ function handleLocalMQTTMessage(topic, message){
         }
     }
     catch (error) {
-        console.log("MQTT on message: ", error);
+        console.log("MQTT catch error: ", error);
     }
 }
 
@@ -204,7 +198,7 @@ function doEventProcess() {
         if (!deviceDataModel.rpi[0].online && !deviceDataModel.rpi[1].online) {
             for (let i = 0; i < deviceDataModel.airconController.length; i++) {
                 localMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "false", { qos: 2, retain: true });
-                cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "false", { qos: 0, retain: false });
+                cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "false", { qos: 0, retain: true });
             }
         }
         else if (deviceDataModel.rpi[0].online || deviceDataModel.rpi[1].online) {
@@ -232,7 +226,7 @@ function personDetector() {
                     shutdownTimer = setTimeout(() => {
                         for (let i = 0; i < deviceDataModel.airconController.length; i++) {
                             localMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "false", { qos: 2, retain: true });
-                            cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "false", { qos: 0, retain: false });
+                            cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "false", { qos: 0, retain: true });
                             deviceDataModel.airconController[i].controllercmd = false;
                         }
                     }, 300000);
