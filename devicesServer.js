@@ -7,8 +7,6 @@ const { port1, port2 } = new MessageChannel();
 
 var deviceDataModel = JSON.parse(fs.readFileSync("deviceDataModel.json"));
 var mqttSubscribe = fs.readFileSync("mqttSubConfig.json");
-var airConditionPowerThreshold = 10;
-var lightingPowerThreshold = 100;
 var isPersonDetected = false;
 var shutdownTimer;
 var localMqttClient;
@@ -20,7 +18,7 @@ var rpi2DetectedMsg = JSON.parse('{"isPerson":false,"prob":0.0}');
 
 async function main() {
     await initilizingMQTT();
-    threadInit();
+    mongoDB_thread_init();
     doEventProcess();
     //console.log(deviceDataModel.get().airconController[0].controllercmd);
 }
@@ -32,7 +30,7 @@ function initilizingMQTT() {
         // Connect MQTT
         localMqttClient = mqtt.connect({
             host: '127.0.0.1',
-            port: '1883',
+            port: '11883',
             username: 'admin',
             password: '5617091',
             clientId: "devicesServer_local",
@@ -206,7 +204,6 @@ function doEventProcess() {
         }
         //console.log(JSON.stringify(deviceDataModel));
         port1.postMessage(deviceDataModel);
-        checkElectricalAppliancesisworking();
     }, 2000)
 }
 
@@ -244,7 +241,7 @@ function personDetector() {
                     resolve(console.log("person detected. ready to control and stop countdown timer."));
                     for (let i = 0; i < deviceDataModel.airconController.length; i++) {
                         localMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "true", { qos: 2, retain: true });
-                        cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "true", { qos: 0, retain: false });
+                        cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/command', "true", { qos: 0, retain: true });
                         deviceDataModel.airconController[i].controllercmd = true;
                     }
                 }
@@ -256,35 +253,7 @@ function personDetector() {
     });
 }
 
-function checkElectricalAppliancesisworking() {
-    for (let i = 0; i < deviceDataModel.airconController.length; i++) {
-        if (deviceDataModel.airconController[i].properties.online == false) {
-            localMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'false', { qos: 1, retain: true });
-            cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'false', { qos: 0, retain: false });
-        }
-        else if (deviceDataModel.airconController[i].properties.online == true) {
-            if (deviceDataModel.airconController[i].measure.power >= airConditionPowerThreshold) {
-                localMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'true', { qos: 1, retain: false });
-                cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'true', { qos: 0, retain: false });
-            }
-            else if (deviceDataModel.airconController[i].measure.power < airConditionPowerThreshold || deviceDataModel.airconController[i].measure.power == null) {
-                localMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'false', { qos: 1, retain: true });
-                cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'false', { qos: 0, retain: false });
-            }
-
-            if (deviceDataModel.airconController[i].measure.power >= airConditionPowerThreshold) {
-                localMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'true', { qos: 1, retain: false });
-                cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'true', { qos: 0, retain: false });
-            }
-            else if (deviceDataModel.airconController[i].measure.power < airConditionPowerThreshold || deviceDataModel.airconController[i].measure.power == null) {
-                localMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'false', { qos: 1, retain: true });
-                cloudMqttClient.publish('myFinalProject/server/electricalAppliances/airconController' + (i + 1) + '/isWorking', 'false', { qos: 0, retain: false });
-            }
-        }
-    }
-}
-
-function threadInit() {
+function mongoDB_thread_init() {
     if (isMainThread) {
         const worker = new Worker('./handleMongoDB.js');
         port2.on('message', (message) => {
