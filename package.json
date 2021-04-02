@@ -1,8 +1,8 @@
 {
-  "name": "nodejstest",
-  "version": "1.0.0",
-  "description": "fortest",
-  "main": "index.js",
+  "name": "952 iot controller",
+  "version": "1.0",
+  "description": "it created for 952 room only.",
+  "main": "devicesServer.js",
   "scripts": {
     "start": "node devicesServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,18 +12,18 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "bootstrap": "^3.3.6",
+    "concurrently": "",
     "cookie-parser": "^1.4.5",
+    "dayjs": "",
+    "edit-json-file": "",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
+    "moment-timezone": "",
+    "mongoose": "",
     "morgan": "^1.6.1",
+    "mqtt": "",
     "multer": "^1.4.2",
     "vue": "^1.0.10",
-    "vue-resource": "^0.1.17",
-    "mongoose": "",
-    "mqtt": "",
-    "edit-json-file": "",
-    "concurrently": "",
-    "moment-timezone": "",
-    "dayjs": ""
+    "vue-resource": "^0.1.17"
   }
 }

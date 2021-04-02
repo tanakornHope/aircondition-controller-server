@@ -3,6 +3,7 @@ const fs = require('fs');
 var mongoose = require('mongoose');
 const { Worker, isMainThread, parentPort } = require('worker_threads');
 
+var dataPushingInterval = 300000;
 var serverIsOnline;
 var mqttClientInstance;
 var mongoDBconnection;
@@ -79,17 +80,18 @@ main();
 
 function mongodb_connect() {
     return new Promise(function (resolve, reject) {
-        //mongoose.connect('mongodb+srv://thanakorn:5617091@cluster0.ljv90.mongodb.net/finalproject',{ useNewUrlParser: true, useUnifiedTopology: true });
-        mongoose.connect('mongodb://admin:5617091@127.0.0.1:27017/finalproject?authSource=admin', 
-        {
+        mongoose.connect('mongodb+srv://thanakorn:5617091@cluster0.ljv90.mongodb.net/finalproject',
+        { 
             useNewUrlParser: true, 
-            useUnifiedTopology: true, 
-            keepAlive: true
+            useUnifiedTopology: true,
+            keepAlive: true,
+            keepAliveInitialDelay: 60000
         }, function(error){
             resolve(console.log("mongoDB conn error:",error));
         });
 
         mongoDBconnection = mongoose.connection;
+
         mongoDBconnection.on("error", function (msg) {
             resolve(console.log("mongoDB error:", msg));
         });
@@ -101,14 +103,6 @@ function mongodb_connect() {
         });
         mongoDBconnection.on("disconnected", function () {
             resolve(console.log("mongoDB was disconnected."));
-            mongoose.connect('mongodb://admin:5617091@127.0.0.1:27017/finalproject?authSource=admin', 
-            {
-                useNewUrlParser: true, 
-                useUnifiedTopology: true, 
-                keepAlive: true
-            }, function(error){
-                resolve(console.log("mongoDB conn error:",error));
-            });
         });
         mongoDBconnection.on("reconnected", function () {
             resolve(console.log("reconnecting is successful."));
@@ -199,6 +193,6 @@ function putDataToMongoDB() {
             mongooseDocument.save(function(error){
                 resolve(console.log("mongo inserting error:", error));
             });
-        }, 60000);
+        }, dataPushingInterval);
     });
 }
