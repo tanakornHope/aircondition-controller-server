@@ -1,0 +1,39 @@
+0 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'start' ]
+1 info using npm@7.5.4
+2 info using node@v15.9.0
+3 timing config:load:defaults Completed in 4ms
+4 timing config:load:file:/usr/lib/node_modules/npm/npmrc Completed in 6ms
+5 timing config:load:builtin Completed in 6ms
+6 timing config:load:cli Completed in 5ms
+7 timing config:load:env Completed in 1ms
+8 timing config:load:file:/home/pi/Desktop/nodeservice/app/.npmrc Completed in 0ms
+9 timing config:load:project Completed in 1ms
+10 timing config:load:file:/home/pi/.npmrc Completed in 1ms
+11 timing config:load:user Completed in 1ms
+12 timing config:load:file:/usr/etc/npmrc Completed in 0ms
+13 timing config:load:global Completed in 0ms
+14 timing config:load:cafile Completed in 1ms
+15 timing config:load:validate Completed in 1ms
+16 timing config:load:setUserAgent Completed in 1ms
+17 timing config:load:setEnvs Completed in 3ms
+18 timing config:load Completed in 25ms
+19 verbose npm-session dc5cb44463f6f933
+20 timing npm:load Completed in 48ms
+21 timing command:run-script Completed in 721ms
+22 timing command:start Completed in 728ms
+23 verbose stack Error: command failed
+23 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/node_modules/@npmcli/promise-spawn/index.js:64:27)
+23 verbose stack     at ChildProcess.emit (node:events:378:20)
+23 verbose stack     at maybeClose (node:internal/child_process:1067:16)
+23 verbose stack     at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)
+24 verbose pkgid nodejstest@1.0.0
+25 verbose cwd /home/pi/Desktop/nodeservice/app
+26 verbose Linux 5.4.83-v7l+
+27 verbose argv "/usr/bin/node" "/usr/bin/npm" "start"
+28 verbose node v15.9.0
+29 verbose npm  v7.5.4
+30 error code 1
+31 error path /home/pi/Desktop/nodeservice/app
+32 error command failed
+33 error command sh -c node devicesServer.js
+34 verbose exit 1

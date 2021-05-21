@@ -1,0 +1,32 @@
+0 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'start' ]
+1 info using npm@7.5.3
+2 info using node@v15.10.0
+3 timing config:load:defaults Completed in 4ms
+4 timing config:load:file:/usr/lib/node_modules/npm/npmrc Completed in 2ms
+5 timing config:load:builtin Completed in 3ms
+6 timing config:load:cli Completed in 16ms
+7 timing config:load:env Completed in 1ms
+8 timing config:load:file:/home/pi/Desktop/nodeservice/.npmrc Completed in 0ms
+9 timing config:load:project Completed in 1ms
+10 timing config:load:file:/home/pi/.npmrc Completed in 1ms
+11 timing config:load:user Completed in 3ms
+12 timing config:load:file:/usr/etc/npmrc Completed in 2ms
+13 timing config:load:global Completed in 3ms
+14 timing config:load:cafile Completed in 1ms
+15 timing config:load:validate Completed in 1ms
+16 timing config:load:setUserAgent Completed in 2ms
+17 timing config:load:setEnvs Completed in 5ms
+18 timing config:load Completed in 43ms
+19 verbose npm-session 85ce642620b192a6
+20 timing npm:load Completed in 108ms
+21 timing command:run-script Completed in 11ms
+22 timing command:start Completed in 22ms
+23 verbose stack Error: missing script: start
+23 verbose stack     at runScript (/usr/lib/node_modules/npm/lib/run-script.js:54:11)
+24 verbose cwd /home/pi/Desktop/nodeservice
+25 verbose Linux 5.10.11-v7l+
+26 verbose argv "/usr/bin/node" "/usr/bin/npm" "start"
+27 verbose node v15.10.0
+28 verbose npm  v7.5.3
+29 error missing script: start
+30 verbose exit 1

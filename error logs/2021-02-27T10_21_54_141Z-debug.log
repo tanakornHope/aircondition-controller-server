@@ -1,0 +1,42 @@
+0 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'start' ]
+1 info using npm@7.5.3
+2 info using node@v15.10.0
+3 timing config:load:defaults Completed in 5ms
+4 timing config:load:file:/usr/lib/node_modules/npm/npmrc Completed in 6ms
+5 timing config:load:builtin Completed in 8ms
+6 timing config:load:cli Completed in 4ms
+7 timing config:load:env Completed in 1ms
+8 timing config:load:file:/home/pi/Desktop/nodeservice/.npmrc Completed in 0ms
+9 timing config:load:project Completed in 3ms
+10 timing config:load:file:/home/pi/.npmrc Completed in 1ms
+11 timing config:load:user Completed in 1ms
+12 timing config:load:file:/usr/etc/npmrc Completed in 1ms
+13 timing config:load:global Completed in 1ms
+14 timing config:load:cafile Completed in 0ms
+15 timing config:load:validate Completed in 1ms
+16 timing config:load:setUserAgent Completed in 3ms
+17 timing config:load:setEnvs Completed in 4ms
+18 timing config:load Completed in 32ms
+19 verbose npm-session 641b8d814e071ec6
+20 timing npm:load Completed in 64ms
+21 http fetch GET 200 https://registry.npmjs.org/npm 885ms
+22 timing command:run-script Completed in 2ms
+23 timing command:start Completed in 16ms
+24 notice [40m[37m[39m[49m
+24 notice [40m[37mNew [33mminor[39m[37m version of npm available! [31m7.5.3[39m[37m -> [32m7.6.0[39m[37m[39m[49m
+24 notice [40m[37mChangelog: [36mhttps://github.com/npm/cli/releases/tag/v7.6.0[39m[37m[39m[49m
+24 notice [40m[37mRun [32mnpm install -g npm@7.6.0[39m[37m to update![39m[49m
+24 notice [40m[37m[39m[49m
+25 verbose stack Error: ENOENT: no such file or directory, open '/home/pi/Desktop/nodeservice/package.json'
+26 verbose cwd /home/pi/Desktop/nodeservice
+27 verbose Linux 5.10.11-v7l+
+28 verbose argv "/usr/bin/node" "/usr/bin/npm" "start"
+29 verbose node v15.10.0
+30 verbose npm  v7.5.3
+31 error code ENOENT
+32 error syscall open
+33 error path /home/pi/Desktop/nodeservice/package.json
+34 error errno -2
+35 error enoent ENOENT: no such file or directory, open '/home/pi/Desktop/nodeservice/package.json'
+36 error enoent This is related to npm not being able to find a file.
+37 verbose exit -2

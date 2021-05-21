@@ -1,0 +1,40 @@
+0 verbose cli [
+0 verbose cli   '/usr/bin/node',
+0 verbose cli   '/usr/bin/npm',
+0 verbose cli   'start',
+0 verbose cli   '/home/pi/Desktop/nodeservice/app/'
+0 verbose cli ]
+1 info using npm@7.5.3
+2 info using node@v15.10.0
+3 timing config:load:defaults Completed in 4ms
+4 timing config:load:file:/usr/lib/node_modules/npm/npmrc Completed in 5ms
+5 timing config:load:builtin Completed in 7ms
+6 timing config:load:cli Completed in 4ms
+7 timing config:load:env Completed in 1ms
+8 timing config:load:project Completed in 2ms
+9 timing config:load:file:/home/pi/.npmrc Completed in 0ms
+10 timing config:load:user Completed in 0ms
+11 timing config:load:file:/usr/etc/npmrc Completed in 1ms
+12 timing config:load:global Completed in 1ms
+13 timing config:load:cafile Completed in 0ms
+14 timing config:load:validate Completed in 1ms
+15 timing config:load:setUserAgent Completed in 1ms
+16 timing config:load:setEnvs Completed in 3ms
+17 timing config:load Completed in 24ms
+18 verbose npm-session 46701cbc644689e7
+19 timing npm:load Completed in 46ms
+20 timing command:run-script Completed in 1ms
+21 timing command:start Completed in 13ms
+22 verbose stack Error: ENOENT: no such file or directory, open '/home/pi/package.json'
+23 verbose cwd /home/pi
+24 verbose Linux 5.10.11-v7l+
+25 verbose argv "/usr/bin/node" "/usr/bin/npm" "start" "/home/pi/Desktop/nodeservice/app/"
+26 verbose node v15.10.0
+27 verbose npm  v7.5.3
+28 error code ENOENT
+29 error syscall open
+30 error path /home/pi/package.json
+31 error errno -2
+32 error enoent ENOENT: no such file or directory, open '/home/pi/package.json'
+33 error enoent This is related to npm not being able to find a file.
+34 verbose exit -2

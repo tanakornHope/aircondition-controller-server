@@ -18,9 +18,9 @@ var rpi2DetectedMsg = JSON.parse('{"isPerson":false,"prob":0.0}');
 var airconPowerOffDuration = 300000;
 
 async function main() {
-    await initilizingMQTT();
-    mongoDB_thread_init();
+    initilizingMQTT();
     doEventProcess();
+    mongoDB_thread_init();
     //console.log(deviceDataModel.get().airconController[0].controllercmd);
 }
 
@@ -30,7 +30,7 @@ function initilizingMQTT() {
     // Connect MQTT
     localMqttClient = mqtt.connect({
         host: '127.0.0.1',
-        port: '11883',
+        port: '1883',
         username: 'admin',
         password: '5617091',
         keepalive: 60,
@@ -305,8 +305,8 @@ function handleLocalMQTTMessage(topic, message){
 }
 
 function doEventProcess() {
-    try {
-        setInterval(() => {
+    setInterval(() => {
+        try {
             deviceDataModel.timeStamp = new Date();
             if (!deviceDataModel.rpi[0].online && !deviceDataModel.rpi[1].online) {
                 for (let i = 0; i < deviceDataModel.airconController.length; i++) {
@@ -333,10 +333,10 @@ function doEventProcess() {
             }
             //console.log(JSON.stringify(deviceDataModel));
             port1.postMessage(deviceDataModel);
-        }, 10000);
-    } catch(error){
-        console.log("doEventProcess interval error:", error);
-    }
+        } catch(error) {
+            console.log("doEventProcess error:", error);
+        }
+    }, 10000);
 }
 
 function personDetecting() {

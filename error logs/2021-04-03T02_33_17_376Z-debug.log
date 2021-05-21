@@ -1,0 +1,69 @@
+0 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', '-g', 'npm@7.8.0' ]
+1 info using npm@7.5.3
+2 info using node@v15.10.0
+3 timing config:load:defaults Completed in 9ms
+4 timing config:load:file:/usr/lib/node_modules/npm/npmrc Completed in 7ms
+5 timing config:load:builtin Completed in 8ms
+6 timing config:load:cli Completed in 8ms
+7 timing config:load:env Completed in 2ms
+8 timing config:load:file:/home/pi/Desktop/nodeservice/app/.npmrc Completed in 1ms
+9 timing config:load:project Completed in 3ms
+10 timing config:load:file:/home/pi/.npmrc Completed in 0ms
+11 timing config:load:user Completed in 1ms
+12 timing config:load:file:/usr/etc/npmrc Completed in 1ms
+13 timing config:load:global Completed in 1ms
+14 timing config:load:cafile Completed in 1ms
+15 timing config:load:validate Completed in 1ms
+16 timing config:load:setUserAgent Completed in 2ms
+17 timing config:load:setEnvs Completed in 5ms
+18 timing config:load Completed in 41ms
+19 verbose npm-session 93abd00168bf6595
+20 timing npm:load Completed in 80ms
+21 timing arborist:ctor Completed in 3ms
+22 timing idealTree:init Completed in 23ms
+23 timing idealTree:userRequests Completed in 14ms
+24 silly idealTree buildDeps
+25 silly fetch manifest npm@7.8.0
+26 http fetch GET 304 https://registry.npmjs.org/npm 574ms (from cache)
+27 silly placeDep ROOT npm@7.8.0 OK for:  want: 7.8.0
+28 timing idealTree:#root Completed in 694ms
+29 timing idealTree:node_modules/npm Completed in 0ms
+30 timing idealTree:buildDeps Completed in 696ms
+31 timing idealTree:fixDepFlags Completed in 2ms
+32 timing idealTree Completed in 739ms
+33 timing reify:loadTrees Completed in 1704ms
+34 timing reify:diffTrees Completed in 29ms
+35 silly reify mark retired [ '/usr/lib/node_modules/npm', '/usr/bin/npm', '/usr/bin/npx' ]
+36 silly reify moves {
+36 silly reify   '/usr/lib/node_modules/npm': '/usr/lib/node_modules/.npm-qUIFSsiV',
+36 silly reify   '/usr/bin/npm': '/usr/bin/.npm-CxSgn0z2',
+36 silly reify   '/usr/bin/npx': '/usr/bin/.npx-akSQqeWh'
+36 silly reify }
+37 timing reify:rollback:retireShallow Completed in 10ms
+38 timing command:install Completed in 1796ms
+39 verbose stack Error: EACCES: permission denied, rename '/usr/lib/node_modules/npm' -> '/usr/lib/node_modules/.npm-qUIFSsiV'
+40 verbose cwd /home/pi/Desktop/nodeservice/app
+41 verbose Linux 5.10.11-v7l+
+42 verbose argv "/usr/bin/node" "/usr/bin/npm" "install" "-g" "npm@7.8.0"
+43 verbose node v15.10.0
+44 verbose npm  v7.5.3
+45 error code EACCES
+46 error syscall rename
+47 error path /usr/lib/node_modules/npm
+48 error dest /usr/lib/node_modules/.npm-qUIFSsiV
+49 error errno -13
+50 error Error: EACCES: permission denied, rename '/usr/lib/node_modules/npm' -> '/usr/lib/node_modules/.npm-qUIFSsiV'
+50 error  [Error: EACCES: permission denied, rename '/usr/lib/node_modules/npm' -> '/usr/lib/node_modules/.npm-qUIFSsiV'] {
+50 error   errno: -13,
+50 error   code: 'EACCES',
+50 error   syscall: 'rename',
+50 error   path: '/usr/lib/node_modules/npm',
+50 error   dest: '/usr/lib/node_modules/.npm-qUIFSsiV'
+50 error }
+51 error The operation was rejected by your operating system.
+51 error It is likely you do not have the permissions to access this file as the current user
+51 error
+51 error If you believe this might be a permissions issue, please double-check the
+51 error permissions of the file and its containing directories, or try running
+51 error the command again as root/Administrator.
+52 verbose exit -13
